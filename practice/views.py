@@ -47,7 +47,7 @@ def create_model (request):
     person = Person.objects.filter(
             first_name__startswith="Paul"
         ).first()
-    print(person.get_absolute_url())
+    print(Person._meta.get_fields())
     return HttpResponse("Done")
 
 

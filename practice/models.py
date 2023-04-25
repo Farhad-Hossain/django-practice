@@ -15,6 +15,8 @@ class Person (models.Model):
     last_name = models.CharField(max_length=50)
     shirt_size = models.CharField(max_length=1, choices=SHIRT_SIZES, default='M')
 
+
+
     @property
     def full_name(self):
         """Returns the persons full name"""
@@ -23,6 +25,9 @@ class Person (models.Model):
     @property
     def reversed_name(self):
         return f"{self.last_name} {self.first_name}"
+    
+    class Meta:
+        indexes = [models.Index(fields=['first_name', 'last_name'])]
 
 class Group (models.Model):
     name = models.CharField(max_length=128)
@@ -62,6 +67,8 @@ class Place(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=50)
 
+    
+
 class Restaurant(Place):
     serves_hot_dogs = models.BooleanField(default=False)
-    serves_pizza = models.BooleanField(default=False)
+    serves_pizza = models.BooleanField(default=False, help_text='Sample <em>help</em> text')
